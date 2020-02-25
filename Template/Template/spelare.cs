@@ -11,25 +11,31 @@ namespace Template
 {
     class Spelare
     {
-        Vector2 positon;
+        Vector2 position;
         Texture2D plan;
         float fart = 10;
         public Spelare(Texture2D texture)
         {
             plan = texture;
-            positon = new Vector2(400,240); 
+            position = new Vector2(350,350); 
         } 
         
         private void Move() {
             KeyboardState kstate = Keyboard.GetState();
             if(kstate.IsKeyDown (Keys.Right))
             {
-                positon.X += fart;  
+                position.X += fart;  
             }
             if(kstate.IsKeyDown(Keys.Left ))
             {
-                positon.X -= fart;
+                position.X -= fart;
             }
+
+            if (position.X < -100)
+                position.X = 800;
+
+            if (position.X > 800)
+                position.X = -100;
         }
 
         public void Update()
@@ -39,7 +45,16 @@ namespace Template
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(plan, positon, Color.White);
+            spriteBatch.Draw(plan, position, Color.White);
+        }
+
+        public void Skjuta()
+        {
+            KeyboardState kstate = Keyboard.GetState();
+            if (kstate.IsKeyDown(Keys.Space))
+            {
+                
+            }
         }
     }
 }
