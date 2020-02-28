@@ -13,10 +13,20 @@ namespace Template
     {
         Vector2 position;
         Texture2D plan;
+        Texture2D kula;
         float fart = 10;
-        public Spelare(Texture2D texture)
+        List<Kula> kullista = new List<Kula>();
+        public List<Kula> Kullista
         {
-            plan = texture;
+            get
+            {
+                return kullista;
+            }
+        }
+        public Spelare(Texture2D spelarTexture, Texture2D kulaTexture)
+        {
+            plan = spelarTexture;
+            kula = kulaTexture;
             position = new Vector2(350,350); 
         } 
         
@@ -41,6 +51,7 @@ namespace Template
         public void Update()
         {
             Move();
+            Skjuta();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -53,6 +64,7 @@ namespace Template
             KeyboardState kstate = Keyboard.GetState();
             if (kstate.IsKeyDown(Keys.Space))
             {
+                kullista.Add(new Kula(kula, position));
                 
             }
         }
